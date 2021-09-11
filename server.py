@@ -6,8 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    x = User.get_all()
-    return(render_template('read_all.html', all_users = x))
+    return(render_template('read_all.html', all_users = User.get_all()))
 
 
 @app.route("/newuser")
@@ -24,6 +23,35 @@ def createuser():
     }
     User.save(data)
     return redirect('/')
+
+
+@app.route('/useredit/<int:id>')
+def edit(id):
+    data ={
+        "id":id
+    }
+    return render_template('edit_user.html', user=User.one_user(data))
+
+@app.route('/update',methods=['POST'])
+def update():
+    User.update(request.form)
+    return redirect('/')
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    data ={
+        "id":id
+    }
+    User.delete(data)
+    return redirect('/')
+
+@app.route('/select/<int:id>')
+def select(id):
+    data ={
+        "id":id
+    }
+    return render_template('select.html', user= User.select(data))
+
 
 
 if __name__ == "__main__":

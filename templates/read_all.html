@@ -12,6 +12,11 @@
       <p><strong>Name:</strong> {{user.first_name}}</p>
       <p><strong>Last Name:</strong> {{user.last_name}}</p>
       <p><strong>Email:</strong> {{user.email}}</p>
+      <p>
+        Action <br /><a href="/select/{{user.id}}">Select</a>
+        <a href="/useredit/{{user.id}}">Edit</a>
+        <a href="/delete/{{user.id}}">Delete</a>
+      </p>
       <h4>==============================================</h4>
       {% endfor %}
     </div>
